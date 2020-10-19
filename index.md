@@ -61,6 +61,70 @@ From package.json:
 }
 ```
 
+## Add a web app manifest
+The web app manifest is a JSON file that tells the browser about your Progressive Web App and how it should behave when installed on the user's desktop or mobile device. A typical manifest file includes the app name, the icons the app should use, and the URL that should be opened when the app is launched.
+
+### How
+1. Create the manifest.webmanifest file - The manifest file can have any name, but is commonly named manifest.webmanifest and served from the root (your website's top-level directory).
+2. Add the web app manifest to your pages - After creating the manifest, add a <link> tag to all the pages of your Progressive Web App. For example:
+```
+<link rel="manifest" href="/manifest.webmanifest">
+```
+
+Sample:
+
+```
+{
+  "short_name": "Weather",
+  "name": "Weather: Do I need an umbrella?",
+  "description": "Weather forecast information",
+  "icons": [
+    {
+      "src": "/images/icons-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/icons-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "background_color": "#3367D6",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#3367D6",
+  "shortcuts": [
+    {
+      "name": "How's weather today?",
+      "short_name": "Today",
+      "description": "View weather information for today",
+      "url": "/today?source=pwa",
+      "icons": [{ "src": "/images/today.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "How's weather tomorrow?",
+      "short_name": "Tomorrow",
+      "description": "View weather information for tomorrow",
+      "url": "/tomorrow?source=pwa",
+      "icons": [{ "src": "/images/tomorrow.png", "sizes": "192x192" }]
+    }
+  ]
+}
+```
+
+Key manifest properties
+- short_name and/or name: You must provide at least the **short_name** or **name** property. If both are provided, **short_name** is used on the user's home screen, launcher, or other places where space may be limited. **name** is used when the app is installed.
+- icons: 
+  - When a user installs your PWA, you can define a set of icons for the browser to use on the home screen, app launcher, task switcher, splash screen, and so on.
+  - The icons property is an array of image objects. Each object must include the src, a sizes property, and the type of image. To use maskable icons, sometimes referred to as adaptive icons on **Android**, you'll also need to add "purpose": "any maskable" to the icon property.
+  - For **Chrome**, you must provide at least a 192x192 pixel icon, and a 512x512 pixel icon. If only those two icon sizes are provided, **Chrome** will automatically scale the icons to fit the device. If you'd prefer to scale your own icons, and adjust them for pixel-perfection, provide icons in increments of 48dp.
+- start_url: 
+  - The start_url is required and tells the browser where your application should start when it is launched, and prevents the app from starting on whatever page the user was on when they added your app to their home screen.
+  - Your start_url should direct the user straight into your app, rather than a product landing page. Think about what the user will want to do once they open your app, and place them there.
+- background_color: The background_color property is used on the splash screen when the application is first launched on mobile.
+- display: You can customize what browser UI is shown when your app is launched. For example, you can hide the address bar and browser chrome. Games can even be made to launch full screen.
 
 ## Is installable
 Users who install or add apps to their device tend to engage with those apps more.
