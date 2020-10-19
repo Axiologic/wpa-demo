@@ -1,37 +1,44 @@
-## Welcome to GitHub Pages
+# Core Progressive Web App checklist
+<br />
 
-You can use the [editor on GitHub](https://github.com/Axiologic/wpa-demo/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+The Progressive Web App Checklist describes what makes an app installable and usable by all users, regardless of size or input type.
+<br />
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Starts fast, stays fast
+Performance plays a significant role in the success of any online experience, because high performing sites engage and retain users better than poorly performing ones. Sites should focus on optimizing for user-centric performance metrics.
 
-### Markdown
+Follow [this guide](https://web.dev/fast/) on fast load times to learn how to make your PWA start fast and stay fast.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Works in any browser
+Users can use any browser they choose to access your web app before it's installed.
 
-```markdown
-Syntax highlighted code block
+## Responsive to any screen size
+Users can use your PWA on any screen size and all of the content is available at any viewport size.
 
-# Header 1
-## Header 2
-### Header 3
+## Provides a custom offline page
+When users are offline, keeping them in your PWA provides a more seamless experience than dropping back to the default browser offline page.
 
-- Bulleted
-- List
+## Is installable
+Users who install or add apps to their device tend to engage with those apps more.
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
+# Optimal Progressive Web App checklist
+To create a truly great Progressive Web App, one that feels like a best-in-class app, you need more than just the core checklist. The optimal Progressive Web App checklist is about making your PWA feel like it's part of the device it's running on while taking advantage of what makes the web powerful.
 
-[Link](url) and ![Image](src)
-```
+## Provides an offline experience
+Where connectivity isn't strictly required, your app works the same offline as it does online.
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Is fully accessible
+All user interactions pass WCAG 2.0 accessibility requirements.
 
-### Jekyll Themes
+## Can be discovered through search
+Your PWA can be easily discovered through search.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Axiologic/wpa-demo/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## Works with any input type
+Your PWA is equally usable with a mouse, a keyboard, a stylus, or touch.
 
-### Support or Contact
+## Provides context for permission requests
+When asking permission to use powerful APIs, provide context and ask only when the API is needed.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## Follows best practices for healthy code
+Keeping your codebase healthy makes it easier to meet your goals and deliver new features.
