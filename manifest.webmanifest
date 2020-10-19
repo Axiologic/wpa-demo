@@ -4,17 +4,17 @@
   "description": "Provides a guide to setup a WPA",
   "icons": [
     {
-      "src": "/images/icons-192.png",
+      "src": "images/icons-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/images/icons-512.png",
+      "src": "images/icons-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": "/?source=pwa",
+  "start_url": "/wpa-demo",
   "background_color": "#16767c",
   "display": "standalone",
   "scope": "/wpa-demo",
