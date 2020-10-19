@@ -67,6 +67,7 @@ The web app manifest is a JSON file that tells the browser about your Progressiv
 ### How
 1. Create the manifest.webmanifest file - The manifest file can have any name, but is commonly named manifest.webmanifest and served from the root (your website's top-level directory).
 2. Add the web app manifest to your pages - After creating the manifest, add a <link> tag to all the pages of your Progressive Web App. For example:
+
 ```
 <link rel="manifest" href="/manifest.webmanifest">
 ```

@@ -14,7 +14,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/wpa-demo",
+  "start_url": "/wpa-demo/",
   "background_color": "#16767c",
   "display": "standalone",
   "scope": "/wpa-demo",
