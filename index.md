@@ -1,9 +1,17 @@
+# Content
+1. [Progressive Web Apps](#progressive-web-apps)
+2. [Testing website's PWA capabilities](#testing-pwa)
+
+
 # Progressive Web Apps
+<a name="progressive-web-apps"></a>
 This guide details the steps needed to transform a web application into a Progressive Web App
 
 **NOTE:** Current webpage satisfy the requirements (the basic ones and most of the advanced optional ones) for a PWA.
 
+
 # Testing website's PWA capabilities
+<a name="testing-pwa"></a>
 
 There are multiple ways of checking if a website is PWA compatible.
 
@@ -364,6 +372,57 @@ The real issue with the experience is they never added any native prompting expe
 - At the bottom of the screen is the share icon (It is an arrow pointing up from a square).
 - At this point the share sheet is rendering. You will need to slide the icons to the left to reveal the 'Add to Homescreen' button.
 - You'll be asked to choose a name for the homescreen icon. So, you know, pick a good one and save it. When you're done it'll show up on your homescreen.
+
+### Known issues
+1. iOS does not use the icons from the manifest file, and that makes the shortcut to your app on the home screen look really bad. There is a simple solution to overcome this issue - just add an apple-touch-icon meta tag with the proper image. Avoid icons with transparency - those will not work.
+
+```
+<!-- place this in a head section -->
+<link rel="apple-touch-icon" href="touch-icon-iphone.png">
+<link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad.png">
+<link rel="apple-touch-icon" sizes="180x180" href="touch-icon-iphone-retina.png">
+<link rel="apple-touch-icon" sizes="167x167" href="touch-icon-ipad-retina.png">
+```
+
+2. A launch screen is normally displayed before an app is fully loaded and ready to use. Unfortunately, iOS doesn't support launch screens generated from the manifest, which is how it works on Android. Instead, it shows a white, blank screen. Apple supports custom meta tags to specify a pre-generated splash screen - `apple-touch-startup-image`. So you just have to generate splash images in the proper sizes.
+
+```
+<!-- place this in a head section -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="/apple_splash_2048.png" sizes="2048x2732" rel="apple-touch-startup-image" />
+<link href="/apple_splash_1668.png" sizes="1668x2224" rel="apple-touch-startup-image" />
+<link href="/apple_splash_1536.png" sizes="1536x2048" rel="apple-touch-startup-image" />
+<link href="/apple_splash_1125.png" sizes="1125x2436" rel="apple-touch-startup-image" />
+<link href="/apple_splash_1242.png" sizes="1242x2208" rel="apple-touch-startup-image" />
+<link href="/apple_splash_750.png" sizes="750x1334" rel="apple-touch-startup-image" />
+<link href="/apple_splash_640.png" sizes="640x1136" rel="apple-touch-startup-image" />
+```
+
+3. On iOS, you can specify a web application title for the launch icon. By default, the `<title>` tag is used. To set a different title, add a meta tag to the webpage, as in:
+
+```
+<!-- place this in a head section -->
+<meta name="apple-mobile-web-app-title" content="AppTitle">
+```
+
+4. On Android, there is a native popup which encourages the user to add an app to their home screen and informs them that our page is a PWA. Unfortunately, there's no such thing on iPhone, so our visitor is not even aware of our app's capabilities. Moreover, as much as 3 taps are required on iOS to add an app to the home screen.
+
+We can add a custom popup which will indicate that our app can be added to home screen.
+```
+// Detects if device is on iOS 
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent );
+}
+// Detects if device is in standalone mode
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+// Checks if should display install popup notification:
+if (isIos() && !isInStandaloneMode()) {
+  // show popup with iOS instalation instructions
+}
+```
+
 
 ## FireFox, Opera, Samsung and other browsers
 Last, the other browsers. Other than Chrome and the new Edge most browsers don't really support an add to desktop on laptops, so the add to homescreen experience in other browsers is largely limited to Android.
