@@ -4,7 +4,7 @@ module.exports = {
   globIgnores: ["_layouts/**"],
   swDest: "sw.js",
   additionalManifestEntries: [
-    { url: "/wpa-demo/index.html", revision: "8" },
-    { url: "/wpa-demo/", revision: "8" },
+    { url: "/wpa-demo/index.html", revision: "9" },
+    { url: "/wpa-demo/", revision: "9" },
   ],
 };
