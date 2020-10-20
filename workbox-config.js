@@ -3,5 +3,8 @@ module.exports = {
   globPatterns: ["**/*.md", "**/*.html"],
   globIgnores: ["_layouts/**"],
   swDest: "sw.js",
-  additionalManifestEntries: ["/wpa-demo/index.html", "/wpa-demo/"],
+  additionalManifestEntries: [
+    { url: "/wpa-demo/index.html", revision: "1" },
+    { url: "/wpa-demo/", revision: "1" },
+  ],
 };
