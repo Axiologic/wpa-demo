@@ -77,11 +77,13 @@
           if (canInstall) {
             deferredPrompt
               .prompt()
-              .then(function (evt) {
+              .then(function (evt) {         
+                alert("waiting...");     
                 // Wait for the user to respond to the prompt
                 return deferredPrompt.userChoice;
               })
               .then(function (choiceResult) {
+                alert('User choice');
                 if (choiceResult.outcome === "accepted") {
                   console.log("User accepted the install prompt");
                 } else {
@@ -89,6 +91,7 @@
                 }
               })
               .catch(function (err) {
+                alert("error: " + err.message);     
                 if (err.message.indexOf("user gesture") > -1) {
                   //recycle, but make sure there is a user gesture involved
                 } else if (err.message.indexOf("The app is already installed") > -1) {
