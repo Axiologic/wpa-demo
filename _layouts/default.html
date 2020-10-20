@@ -59,6 +59,7 @@
       let deferredPrompt;
 
       window.addEventListener('beforeinstallprompt', (e) => {
+        alert("beforeinstallprompt")
         // Prevent the mini-infobar from appearing on mobile
         e.preventDefault();
         // Stash the event so it can be triggered later.
@@ -79,6 +80,7 @@
       });
 
       window.addEventListener('appinstalled', (evt) => {
+        alert("appinstalled")
         // Log install to analytics
         console.log('INSTALL: Success');
       });
