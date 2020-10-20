@@ -46,6 +46,8 @@
     </header>
 
     <main id="content" class="main-content" role="main">
+      <button id="installPWA" disabled="disabled" >Install</button>
+
       {{ content }}
 
       <footer class="site-footer">
@@ -57,6 +59,8 @@
     </main>
 
     <script>
+      const installButton = document.getElementById("installPWA");
+      
       let canProceedWithInstall = true;
       if ("onbeforeinstallprompt" in window) {
         let deferredPrompt;
@@ -73,10 +77,10 @@
           // Stash the event so it can be triggered later.
           deferredPrompt = e;
           // Update UI notify the user they can install the PWA
-          setTimeout(() => {
-            const canInstall = confirm("Do you wish to install the current website as an application?");
-            if (canInstall) {
-              deferredPrompt
+
+          installButton.disabled = false;
+          installButton.addEventListener("click", () => {
+            deferredPrompt
                 .prompt()
                 .then(function (evt) {         
                   alert("waiting...");     
@@ -103,8 +107,7 @@
                     return err;
                   }
                 });
-            }
-          }, 500);
+          })
         });
       }
 
