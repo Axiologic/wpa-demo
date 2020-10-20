@@ -57,9 +57,16 @@
     </main>
 
     <script>
+      let canProceedWithInstall = true;
       if ("onbeforeinstallprompt" in window) {
         let deferredPrompt;
         window.addEventListener("beforeinstallprompt", (e) => {
+          if(!canProceedWithInstall) {
+            return;
+          }
+
+          canProceedWithInstall = false;
+
           alert("beforeinstallprompt");
           // Prevent the mini-infobar from appearing on mobile
           e.preventDefault();
