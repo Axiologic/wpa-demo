@@ -66,39 +66,33 @@
           // Stash the event so it can be triggered later.
           deferredPrompt = e;
           // Update UI notify the user they can install the PWA
-          // const canInstall = confirm("Do you wish to install the current website as an application?");
-          // if (canInstall) {
-          //   deferredPrompt.prompt();
-
-          //   deferredPrompt.userChoice.then((choiceResult) => {
-          //     if (choiceResult.outcome === "accepted") {
-          //       console.log("User accepted the install prompt");
-          //     } else {
-          //       console.log("User dismissed the install prompt");
-          //     }
-          //   });
-          // }
-
-          deferredPrompt
-            .prompt()
-            .then(function (evt) {
-              // Wait for the user to respond to the prompt
-              return _beforeInstallPrompt.userChoice;
-            })
-            .then(function (choiceResult) {
-              //do stuff here
-            })
-            .catch(function (err) {
-              if (err.message.indexOf("user gesture") > -1) {
-                //recycle, but make sure there is a user gesture involved
-              } else if (err.message.indexOf("The app is already installed") > -1) {
-                //the app is installed, no need to prompt, but you may need to log or update state values
-                alert("The app is already installed")
-              } else {
-                alert("Error")
-                return err;
-              }
-            });
+          const canInstall = confirm("Do you wish to install the current website as an application?");
+          if (canInstall) {
+            deferredPrompt
+              .prompt()
+              .then(function (evt) {
+                // Wait for the user to respond to the prompt
+                return _beforeInstallPrompt.userChoice;
+              })
+              .then(function (choiceResult) {
+                if (choiceResult.outcome === "accepted") {
+                  console.log("User accepted the install prompt");
+                } else {
+                  console.log("User dismissed the install prompt");
+                }
+              })
+              .catch(function (err) {
+                if (err.message.indexOf("user gesture") > -1) {
+                  //recycle, but make sure there is a user gesture involved
+                } else if (err.message.indexOf("The app is already installed") > -1) {
+                  //the app is installed, no need to prompt, but you may need to log or update state values
+                  alert("The app is already installed")
+                } else {
+                  alert("Error")
+                  return err;
+                }
+              });
+          }
         });
       }
 
