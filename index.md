@@ -3,15 +3,15 @@
 2. [Testing website's PWA capabilities](#testing-pwa)
 
 
-# Progressive Web Apps
 <a name="progressive-web-apps"></a>
+# Progressive Web Apps 
 This guide details the steps needed to transform a web application into a Progressive Web App
 
 **NOTE:** Current webpage satisfy the requirements (the basic ones and most of the advanced optional ones) for a PWA.
 
 
-# Testing website's PWA capabilities
 <a name="testing-pwa"></a>
+# Testing website's PWA capabilities
 
 There are multiple ways of checking if a website is PWA compatible.
 
