@@ -291,3 +291,7 @@ Keeping your codebase healthy makes it easier to meet your goals and deliver new
 
 ### How
 There are a number of high-priority checks to ensure a healthy codebase: avoiding using libraries with known vulnerabilities, ensuring you're not using deprecated APIs, removing web anti-patterns from your codebase (like using document.write() or having non-passive scroll event listeners), and even coding defensively to ensure your PWA doesn't break if analytics or other third party libraries fail to load. Consider requiring static code analysis, like linting, as well as automated testing, in multiple browsers and release channels. These techniques can help catch errors before they make it into production.
+
+
+## How to provide your own in-app install experience
+In addition to the [browser provided install experience](https://web.dev/promote-install/#browser-promotion), it's possible to [provide your own custom install flow](https://web.dev/customize-install/), directly within your app.
