@@ -31,14 +31,6 @@
         });
       }
     </script>
-
-    <style>
-      @media all and (display-mode: standalone) {
-        #installPWA {
-          display: none;
-        }
-      }
-    </style>
   </head>
   <body>
     <header class="page-header" role="banner">
@@ -54,7 +46,7 @@
     </header>
 
     <main id="content" class="main-content" role="main">
-      <button id="installPWA" disabled="disabled" >Install</button>
+      <button id="installPWA" style="display: none;" >Install</button>
 
       {{ content }}
 
@@ -68,6 +60,18 @@
 
     <script>
       const installButton = document.getElementById("installPWA");
+
+      const isIos = () => {
+        const userAgent = window.navigator.userAgent.toLowerCase();
+        return /iphone|ipad|ipod/.test( userAgent );
+      }
+      // Detects if device is in standalone mode
+      const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+      // Checks if should display install popup notification:
+      if (isIos() && !isInStandaloneMode()) {
+        alert('To install this application you must tap Share and then Add to homescreen');
+      }
       
       let canProceedWithInstall = true;
       if ("onbeforeinstallprompt" in window) {
@@ -79,24 +83,22 @@
 
           canProceedWithInstall = false;
 
-          alert("beforeinstallprompt");
+          alert("ready to install");
           // Prevent the mini-infobar from appearing on mobile
           e.preventDefault();
           // Stash the event so it can be triggered later.
           deferredPrompt = e;
           // Update UI notify the user they can install the PWA
 
-          installButton.disabled = false;
+          installButton.style.display = 'block';
           installButton.addEventListener("click", () => {
             deferredPrompt
                 .prompt()
                 .then(function (evt) {         
-                  alert("waiting...");     
                   // Wait for the user to respond to the prompt
                   return deferredPrompt.userChoice;
                 })
                 .then(function (choiceResult) {
-                  alert('User choice');
                   if (choiceResult.outcome === "accepted") {
                     console.log("User accepted the install prompt");
                   } else {
@@ -119,13 +121,11 @@
         });
       }
 
-      if ("appinstalled" in window) {
-        window.addEventListener("appinstalled", (evt) => {
-          alert("appinstalled");
-          // Log install to analytics
-          console.log("INSTALL: Success");
-        });
-      }
+      window.addEventListener("appinstalled", (evt) => {
+        alert("appinstalled");
+        // Log install to analytics
+        console.log("INSTALL: Success");
+      });
     </script>
   </body>
 </html>
