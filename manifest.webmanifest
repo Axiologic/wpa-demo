@@ -23,6 +23,6 @@
   "start_url": "/wpa-demo/",
   "background_color": "#16767c",
   "display": "standalone",
-  "scope": "/wpa-demo",
+  "scope": "/wpa-demo/",
   "theme_color": "#16767c"
 }
