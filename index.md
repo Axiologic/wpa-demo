@@ -1,6 +1,9 @@
 # Content
 1. [Progressive Web Apps](#progressive-web-apps)
 2. [Testing website's PWA capabilities](#testing-pwa)
+3. [Core Progressive Web App checklist](#core-checklist)
+4. [Optimal Progressive Web App checklist](#optimal-checklist)
+5. [How to provide your own in-app install experience](#own-app-install)
 
 
 <a name="progressive-web-apps"></a>
@@ -29,22 +32,27 @@ Running Lighthouse
 4. Click Perform an audit. DevTools shows you a list of audit categories. Leave them all enabled or just check "Progressive Web App" for testing only PWA capabilities.
 5. Click Run audit. After 30 to 60 seconds, Lighthouse gives you a report on the page.
 
+<a name="core-checklist"></a>
 # Core Progressive Web App checklist
 <br />
 
 The Progressive Web App Checklist describes what makes an app installable and usable by all users, regardless of size or input type.
 <br />
 
+
 ## Starts fast, stays fast
 Performance plays a significant role in the success of any online experience, because high performing sites engage and retain users better than poorly performing ones. Sites should focus on optimizing for user-centric performance metrics.
 
 Follow [this guide](https://web.dev/fast/) on fast load times to learn how to make your PWA start fast and stay fast.
 
+
 ## Works in any browser
 Users can use any browser they choose to access your web app before it's installed.
 
+
 ## Responsive to any screen size
 Users can use your PWA on any screen size and all of the content is available at any viewport size.
+
 
 ## Provides a custom offline page
 When users are offline, keeping them in your PWA provides a more seamless experience than dropping back to the default browser offline page.
@@ -158,6 +166,7 @@ Key manifest properties
 - background_color: The background_color property is used on the splash screen when the application is first launched on mobile.
 - display: You can customize what browser UI is shown when your app is launched. For example, you can hide the address bar and browser chrome. Games can even be made to launch full screen.
 
+
 ## Is installable
 Users who install or add apps to their device tend to engage with those apps more.
 
@@ -178,11 +187,14 @@ Users who install or add apps to their device tend to engage with those apps mor
 
 
 
+<a name="optimal-checklist"></a>
 # Optimal Progressive Web App checklist
 To create a truly great Progressive Web App, one that feels like a best-in-class app, you need more than just the core checklist. The optimal Progressive Web App checklist is about making your PWA feel like it's part of the device it's running on while taking advantage of what makes the web powerful.
 
+
 ## Redirects HTTP traffic to HTTPS
 If you've already set up HTTPS, make sure that you redirect all HTTP traffic to HTTPS in order to enable secure web features for all your users.
+
 
 ## Configured for a custom splash screen
 A themed splash screen ensures a high-quality experience when users launch your app from their homescreens.
@@ -306,6 +318,7 @@ Keeping your codebase healthy makes it easier to meet your goals and deliver new
 There are a number of high-priority checks to ensure a healthy codebase: avoiding using libraries with known vulnerabilities, ensuring you're not using deprecated APIs, removing web anti-patterns from your codebase (like using document.write() or having non-passive scroll event listeners), and even coding defensively to ensure your PWA doesn't break if analytics or other third party libraries fail to load. Consider requiring static code analysis, like linting, as well as automated testing, in multiple browsers and release channels. These techniques can help catch errors before they make it into production.
 
 
+<a name="own-app-install"></a>
 # How to provide your own in-app install experience
 In addition to the [browser provided install experience](https://web.dev/promote-install/#browser-promotion), it's possible to [provide your own custom install flow](https://web.dev/customize-install/), directly within your app.
 
