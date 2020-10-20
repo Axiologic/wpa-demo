@@ -20,6 +20,7 @@
     <link rel="canonical" href="https://axiologic.github.io/wpa-demo/" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="stylesheet" href="style/addtohomescreen.css">
     <link rel="manifest" href="manifest.webmanifest">
 
     <script>
@@ -31,6 +32,14 @@
         });
       }
     </script>
+
+    <script src="addtohomescreen.min.js"></script>
+
+    <script>
+      addToHomescreen({
+          //options
+      });
+      </script>
   </head>
   <body>
     <header class="page-header" role="banner">
@@ -58,7 +67,7 @@
       </footer>
     </main>
 
-    <script>
+    <!-- <script>
       const installButton = document.getElementById("installPWA");
 
       const isIos = () => {
@@ -83,7 +92,7 @@
 
           canProceedWithInstall = false;
 
-          alert("ready to install");
+          // alert("ready to install");
           // Prevent the mini-infobar from appearing on mobile
           e.preventDefault();
           // Stash the event so it can be triggered later.
@@ -126,6 +135,6 @@
         // Log install to analytics
         console.log("INSTALL: Success");
       });
-    </script>
+    </script> -->
   </body>
 </html>

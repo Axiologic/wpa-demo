@@ -1,3 +1,8 @@
+# Progressive Web Apps
+This guide details the steps needed to transform a web application into a Progressive Web App
+
+**NOTE:** Current webpage satisfy the requirements (the basic ones and most of the advanced optional ones) for a PWA.
+
 # Testing website's PWA capabilities
 
 There are multiple ways of checking if a website is PWA compatible.
@@ -293,5 +298,74 @@ Keeping your codebase healthy makes it easier to meet your goals and deliver new
 There are a number of high-priority checks to ensure a healthy codebase: avoiding using libraries with known vulnerabilities, ensuring you're not using deprecated APIs, removing web anti-patterns from your codebase (like using document.write() or having non-passive scroll event listeners), and even coding defensively to ensure your PWA doesn't break if analytics or other third party libraries fail to load. Consider requiring static code analysis, like linting, as well as automated testing, in multiple browsers and release channels. These techniques can help catch errors before they make it into production.
 
 
-## How to provide your own in-app install experience
+# How to provide your own in-app install experience
 In addition to the [browser provided install experience](https://web.dev/promote-install/#browser-promotion), it's possible to [provide your own custom install flow](https://web.dev/customize-install/), directly within your app.
+
+
+## Chrome and Edge
+The Chromium project has the best progressive web application homescreen prompt mechanism, the *beforeinstallprompt* event and a native prompt banner.
+
+**NOTE:** The *beforeinstallprompt* event will trigger if the browser determines the site meets its minimal PWA requirements.
+
+**NOTE:** Each browser determines its own criteria of what exactly are the minimum PWA and PWA installability requirements.
+
+The way the prompt is supposed to work is you capture the event and keep it from triggering until you want it to prompt the user.
+
+```
+let installButton = ... // button which the user should press in order to trigger the instalation process (usually hidden at first)
+if ("onbeforeinstallprompt" in window) {
+  let deferredPrompt;
+  window.addEventListener("beforeinstallprompt", (e) => {
+    // Prevent the mini-infobar from appearing on mobile
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    deferredPrompt = e;
+    // Update UI notify the user they can install the PWA
+
+    installButton.style.display = 'block';
+    installButton.addEventListener("click", () => {
+      deferredPrompt
+          .prompt()
+          .then(function (evt) {         
+            // Wait for the user to respond to the prompt
+            return deferredPrompt.userChoice;
+          })
+          .then(function (choiceResult) {
+            if (choiceResult.outcome === "accepted") {
+              console.log("User accepted the install prompt");
+            } else {
+              console.log("User dismissed the install prompt");
+            }
+          })
+          .catch(function (err) {    
+            if (err.message.indexOf("user gesture") > -1) {
+              //recycle, but make sure there is a user gesture involved
+            } else if (err.message.indexOf("The app is already installed") > -1) {
+              //the app is installed, no need to prompt
+              alert("The app is already installed")
+            } else {
+              alert("Error")
+              return err;
+            }
+          });
+    });
+  });
+}
+```
+
+**NOTE:** Beware, just because the event fires does not mean the prompt will trigger. The published rule requires the prompt to be displayed in response to a user action. This means the user should click a button or some other action.
+
+
+## iPhone or iPad
+Apple has supported this add to homescreen installation flow with touch icons and the ability to open installed web apps full screen.
+
+The real issue with the experience is they never added any native prompting experience. Instead the user has to walk through a collection of steps to install the application:
+- Open up Safari and load a web site.
+- At the bottom of the screen is the share icon (It is an arrow pointing up from a square).
+- At this point the share sheet is rendering. You will need to slide the icons to the left to reveal the 'Add to Homescreen' button.
+- You'll be asked to choose a name for the homescreen icon. So, you know, pick a good one and save it. When you're done it'll show up on your homescreen.
+
+## FireFox, Opera, Samsung and other browsers
+Last, the other browsers. Other than Chrome and the new Edge most browsers don't really support an add to desktop on laptops, so the add to homescreen experience in other browsers is largely limited to Android.
+
+Right now, these browsers don't support the beforeinstallprompt, so the experience is sort of like iOS, manual.
