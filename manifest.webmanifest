@@ -1,20 +1,20 @@
 {
-  "short_name": "wpa-demo",
-  "name": "WPA demo",
-  "description": "Provides a guide to setup a WPA",
+  "short_name": "Dossiers UI",
+  "name": "Dossiers UI",
+  "description": "Dossiers' User Interface",
   "icons": [
     {
-      "src": "images/icons-192.png",
+      "src": "assets/images-pwa/icons-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "images/icons-512.png",
+      "src": "assets/images-pwa/icons-512.png",
       "type": "image/png",
       "sizes": "512x512"
     },
     {
-      "src": "images/maskable_icon.png",
+      "src": "assets/images-pwa/maskable_icon.png",
       "sizes": "1024x1024",
       "type": "image/png",
       "purpose": "any maskable"

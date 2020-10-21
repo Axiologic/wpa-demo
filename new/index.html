@@ -1,0 +1,94 @@
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <base href=".." target="_self">
+    <script src="bundles/webshims.js"></script>
+    <script src="bundles/openDSU.js"></script>
+    <script type="module" src="controllers/NewController.js"></script>
+    <script src="assets/js/stepper.min.js"></script>
+    <link href="assets/css/stepper.min.css" type="text/css" rel="stylesheet"/>
+    <link href="assets/fontawesome-free-5.12.1-web/css/all.min.css" type="text/css" rel="stylesheet"/>
+
+</head>
+<body style="display: none">
+<div class="wizard-container">
+    <div id="psk-wizard" class="bs-stepper stepper-content row pl-lg-4 pl-md-2 px-2 ">
+        <div class="bs-stepper-header p-0 m-0" role="tablist">
+            <div class="step" data-target="#enter-pin-step">
+                <button type="button" class="step-trigger" role="tab" id="stepper1trigger2" aria-controls="enter-pin-step">
+                    <span class="bs-stepper-circle">1</span>
+                    <span class="bs-stepper-label" id="step-pin">PIN</span>
+                </button>
+            </div>
+            <div class="bs-stepper-line"></div>
+            <div class="step" data-target="#complete-step">
+                <button type="button" class="step-trigger" role="tab" id="stepper1trigger3" aria-controls="complete-step">
+                    <span class="bs-stepper-circle">2</span>
+                    <span class="bs-stepper-label" id="step-complete">Complete</span>
+                </button>
+            </div>
+        </div>
+        <div class="bs-stepper-content set-pin-content">
+
+                <div id="enter-pin-step" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger2">
+                    <form onSubmit="controller.submitPin(event)">
+                    <div id="more-information"></div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="pin" class="pin-label" id="set-up-pin">Set up an easy to remember PIN</label>
+                            <input type="password" class="form-control" id="pin" placeholder="Enter your PIN"
+                                   oninput="controller.validatePIN(event)"/>
+                            <small id="pin-help" class="form-text text-muted">Setup a easy to remember PIN.</small>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="pin" id="confirm-your-pin" class="pin-label">Confirm your PIN</label>
+                            <input type="password" class="form-control" id="confirm-pin" placeholder="Confirm PIN"
+                                   oninput="controller.validatePIN(event)"/>
+                            <small id="pin-confirm-help" class="form-text text-muted">PINs should be identical.</small>
+                        </div>
+                        <div class="buttons-box buttons-box-set-pin">
+                            <button type="button" class="btn btn-csb-loader btn-csb-new" onclick="controller.goToLandingPage()">Back</button>
+                            <button id="set-pin-btn" class="btn btn-csb-loader btn-csb-restore btn-primary" onclick="controller.submitPin(event)"
+                                    disabled="disabled">Set PIN
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row ml-1">
+                        <label id="pin-error" class="error"></label>
+                    </div>
+                    </form>
+                </div>
+
+                <div id="complete-step" role="tabpanel" class="bs-stepper-pane text-center"
+                     aria-labelledby="stepper1trigger3">
+
+
+                    <div class="form-group">
+                        <label for="seed" id="seed_keep_secret">Please keep secret this seed</label>
+                        <div class="input-group mb-3">
+                            <input type="text" disabled="disabled" class="form-control" id="seed">
+                            <div class="input-group-append">
+                                <button onclick="window.print();" class="btn btn-outline-secondary" type="button"><i class="fas fa-print"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <small class="form-text text-muted" id="seed_print">You can print it on a piece of paper.</small>
+                    </div>
+
+                    <div class="row ml-1">
+                        <label id="error" class="error"></label>
+                    </div>
+
+
+                    <button type="button" class="btn btn-csb-restore btn-csb-loader btn-primary mt-5" id="open-wallet-btn" onclick="controller.goToLandingPage();">Open Wallet</button>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
