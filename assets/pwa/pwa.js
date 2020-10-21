@@ -108,14 +108,14 @@ if ("serviceWorker" in navigator) {
           })
           .catch(function (err) {
             closeModal();
-            alert("error: " + err.message);
+            console.log(err);
             if (err.message.indexOf("user gesture") > -1) {
               //recycle, but make sure there is a user gesture involved
             } else if (err.message.indexOf("The app is already installed") > -1) {
               //the app is installed, no need to prompt, but you may need to log or update state values
-              alert("The app is already installed");
+              // alert("The app is already installed");
             } else {
-              alert("Error");
+              // alert("Error");
               return err;
             }
           });
@@ -123,16 +123,12 @@ if ("serviceWorker" in navigator) {
     }
   };
 
-  // Checks if should display install popup notification:
-  if (isIos() && !isInStandaloneMode()) {
-    showInstallationModal();
-  }
-
-  // window.addEventListener("load", () => {
-  //     showInstallationModal();
-  // });
-
   window.addEventListener("load", () => {
+    // Checks if should display install popup notification:
+    if (isIos() && !isInStandaloneMode()) {
+      showInstallationModal();
+    }
+
     observeDOM(document.body, () => {
       const installPWAModal = document.querySelector("div#installPWAModal");
       if (!installPWAModal) {
