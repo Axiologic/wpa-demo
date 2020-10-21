@@ -41,8 +41,8 @@ if ("serviceWorker" in navigator) {
   };
   // Detects if device is in standalone mode
   const isInStandaloneMode = () => "standalone" in window.navigator && window.navigator.standalone;
-  const canInstallAutomatically = () => !isIos();
-  const canInstallManually = () => isIos() && !isInStandaloneMode() && deferredPrompt;
+  const canInstallAutomatically = () => !isIos() && deferredPrompt;
+  const canInstallManually = () => isIos() && !isInStandaloneMode();
   const canInstallApp = () => (canInstallAutomatically() || canInstallManually()) && !wasModalClosed;
 
   const closeModal = () => {
