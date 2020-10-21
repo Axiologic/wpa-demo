@@ -2,56 +2,13 @@
 if ("serviceWorker" in navigator) {
   // Use the window load event to keep the page load performant
   window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("swPwa.js", { scope: "/wpa-demo/" })
-      .then(function (registration) {
-        /**
-         * Wether WorkBox cached files are being updated.
-         * @type {boolean}
-         * */
-        let updating;
-
-        // Function handler for the ServiceWorker updates.
-        registration.onupdatefound = () => {
-          const serviceWorker = registration.installing;
-          if (serviceWorker == null) {
-            // service worker is not available return.
-            return;
-          }
-
-          // Listen to the browser's service worker state changes
-          serviceWorker.onstatechange = () => {
-            // IF ServiceWorker has been installed
-            // AND we have a controller, meaning that the old chached files got deleted and new files cached
-            // AND ServiceWorkerRegistration is waiting
-            // THEN let ServieWorker know that it can skip waiting.
-            if (
-              serviceWorker.state === "installed" &&
-              navigator.serviceWorker.controller &&
-              registration &&
-              registration.waiting
-            ) {
-              updating = true;
-              // In my "~/serviceworker.js" file there is an event listener that got added to listen to the post message.
-              registration.waiting.postMessage({ type: "SKIP_WAITING" });
-            }
-
-            // IF we had an update of the cache files and we are done activating the ServiceWorker service
-            // THEN let the user know that we updated the files and we are reloading the website.
-            if (updating && serviceWorker.state === "activated") {
-              // I am using an alert as an example, in my code I use a custom dialog that has an overlay so that the user can't do anything besides clicking okay.
-              alert("The cached files have been updated, the browser will re-load.");
-              window.location.reload();
-            }
-          };
-        };
-
-        console.log("ServiceWorker registration successful with scope: ", registration.scope);
-      })
-      .catch(function (err) {
-        //registration failed :(
-        console.log("ServiceWorker registration failed: ", err);
+    navigator.serviceWorker.register("swPwa.js", { scope: "/wpa-demo/" }).then(() => {
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        for (let registration of registrations) {
+          registration.update();
+        }
       });
+    });
   });
 }
 
