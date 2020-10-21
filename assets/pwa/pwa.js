@@ -46,7 +46,7 @@ if ("serviceWorker" in navigator) {
   const canInstallManually = () => isIos() && !isInStandaloneMode();
   const canInstallApp = () => (canInstallAutomatically() || canInstallManually()) && !wasModalClosed;
 
-  alert("userAgent:" + userAgent);
+  alert("userAgent:" + window.navigator.userAgent.toLowerCase());
   alert("isInStandaloneMode:" + isInStandaloneMode());
 
   const closeModal = () => {
