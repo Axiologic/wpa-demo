@@ -56,7 +56,7 @@ if ("serviceWorker" in navigator) {
 
     const automaticInstallationContent = `
         <div class="automatic-pwa-container">
-          <button id="installPWA" class="btn-primary">Install!</button>
+          <button id="installPWA" class="btn-primary">Install</button>
           <button id="closePWAModal" class="btn-secondary">Cancel</button>
         </div>
       `;
