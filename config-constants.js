@@ -3,7 +3,7 @@ let APP_CONFIG = {
   LABELS_DICTIONARY: {
     APP_NAME: "Web Dossier",
     APP_DESCRIPTION: "A smart application to keep your secrets",
-    NEW_DOSSIER: "New Dossier3",
+    NEW_DOSSIER: "New Dossier4",
     RESTORE_DOSSIER: "Restore Dossier",
     WALLET_AUTHORIZATION: "Wallet Authorization",
     PIN: "PIN",
