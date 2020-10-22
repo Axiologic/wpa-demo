@@ -156,7 +156,6 @@ if ("serviceWorker" in navigator) {
   }
 
   window.addEventListener("appinstalled", (evt) => {
-    alert("appinstalled");
     // Log install to analytics
     console.log("INSTALL: Success");
   });
