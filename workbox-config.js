@@ -4,4 +4,5 @@ module.exports = {
   globIgnores: ["sw*.js", "node_modules/**/*.*", "loader-config.js", "assets/pwa/pwa.js"],
   swDest: "./swPwa.js",
   cleanupOutdatedCaches: true,
+  skipWaiting: true,
 };
