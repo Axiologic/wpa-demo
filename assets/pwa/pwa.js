@@ -2,15 +2,7 @@
 if ("serviceWorker" in navigator) {
   // Use the window load event to keep the page load performant
   window.addEventListener("load", () => {
-    navigator.serviceWorker.getRegistrations().then(function (registrations) {
-      Promise.all(registrations.map((registration) => registration.unregister()))
-        .catch((error) => {
-          console.log("error while unregistering service worker", error);
-        })
-        .then(() => {
-          navigator.serviceWorker.register("swPwa.js", { scope: "/wpa-demo/" });
-        });
-    });
+    navigator.serviceWorker.register("swPwa.js", { scope: "/wpa-demo/" });
   });
 }
 
