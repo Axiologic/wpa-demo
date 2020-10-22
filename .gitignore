@@ -1,5 +1,4 @@
 /node_modules
 /.idea
 loader-config.local.json
-/bundles
 /swBoot.js
