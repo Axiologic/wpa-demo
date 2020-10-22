@@ -2,13 +2,7 @@
 if ("serviceWorker" in navigator) {
   // Use the window load event to keep the page load performant
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("swPwa.js", { scope: "/wpa-demo/" }).then(() => {
-      navigator.serviceWorker.getRegistrations().then(function (registrations) {
-        for (let registration of registrations) {
-          registration.update();
-        }
-      });
-    });
+    navigator.serviceWorker.register("swPwa.js", { scope: "/wpa-demo/" });
   });
 }
 
