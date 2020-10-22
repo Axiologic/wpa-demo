@@ -20,9 +20,9 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "/wpa-demo/",
+  "start_url": "/wpa-demo1/",
   "background_color": "#16767c",
   "display": "standalone",
-  "scope": "/wpa-demo/",
+  "scope": "/wpa-demo1/",
   "theme_color": "#16767c"
 }
