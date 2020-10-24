@@ -75,6 +75,10 @@
         wb.addEventListener("externalwaiting", showSkipWaitingPrompt);
 
         wb.register().then((r) => (registration = r));
+
+        setInterval(() => {
+          wb.update();
+        }, 1000);
       }
     </script>
 
