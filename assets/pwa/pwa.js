@@ -4,6 +4,20 @@ if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("swPwa.js", { scope: "/wpa-demo1/" }).then((registration) => {
       console.log(registration);
+
+      registration.addEventListener("updatefound", () => {
+        const newWorker = reg.installing;
+        newWorker.addEventListener("statechange", () => {
+          // newWorker.state has changed
+          if (newWorker.state === "installed") {
+            if (navigator.serviceWorker.controller) {
+              if (confirm("New Update available")) {
+                window.location.reload();
+              }
+            }
+          }
+        });
+      });
     });
   });
 }
