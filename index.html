@@ -74,7 +74,7 @@
         // wb.addEventListener("waiting", showSkipWaitingPrompt);
         // wb.addEventListener("externalwaiting", showSkipWaitingPrompt);
 
-        wb.addEventListener("installed", (event) => { 
+        wb.addEventListener("installed", (event) => {
           console.log("installed", event);
           if (event.isUpdate) {
             if (confirm(`New content is available!. Click OK to refresh!`)) {
@@ -87,22 +87,25 @@
           registration = r;
 
           registration.addEventListener("updatefound", () => {
+            console.log("updatefound", { installing: registration.installing, active: registration.active });
             const newWorker = registration.installing;
             newWorker &&
               newWorker.addEventListener("statechange", () => {
+                console.log("installing statechange");
                 // newWorker.state has changed
                 if (newWorker.state === "installed") {
                   if (navigator.serviceWorker.controller) {
-                    if (confirm("New Update available installing")) {  
-                      window.location.reload(); 
+                    if (confirm("New Update available installing")) {
+                      window.location.reload();
                     }
                   }
                 }
               });
 
-            const activeWorker = registration.active; 
+            const activeWorker = registration.active;
             activeWorker &&
               activeWorker.addEventListener("statechange", () => {
+                console.log("active statechange");
                 // activeWorker.state has changed
                 if (activeWorker.state === "installed") {
                   if (navigator.serviceWorker.controller) {
