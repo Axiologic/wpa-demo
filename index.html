@@ -78,12 +78,29 @@
           console.log("installed", event);
           if (event.isUpdate) {
             if (confirm(`New content is available!. Click OK to refresh!`)) {
-              window.location.reload(); 
+              window.location.reload();
             }
           }
         });
 
-        wb.register().then((r) => (registration = r));
+        wb.register().then((r) => {
+          registration = r;
+
+          registration.addEventListener("updatefound", () => {
+            const newWorker = registration.installing;
+            newWorker &&
+              newWorker.addEventListener("statechange", () => {
+                // newWorker.state has changed
+                if (newWorker.state === "installed") {
+                  if (navigator.serviceWorker.controller) {
+                    if (confirm("New Update available")) {
+                      window.location.reload();
+                    }
+                  }
+                }
+              });
+          });
+        });
 
         setInterval(() => {
           wb.update();
