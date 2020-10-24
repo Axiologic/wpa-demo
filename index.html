@@ -99,6 +99,19 @@
                   }
                 }
               });
+
+            const activeWorker = registration.active;
+            activeWorker &&
+              activeWorker.addEventListener("statechange", () => {
+                // activeWorker.state has changed
+                if (activeWorker.state === "installed") {
+                  if (navigator.serviceWorker.controller) {
+                    if (confirm("New Update available")) {
+                      window.location.reload();
+                    }
+                  }
+                }
+              });
           });
         });
 
