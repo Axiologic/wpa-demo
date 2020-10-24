@@ -93,7 +93,7 @@
                 // newWorker.state has changed
                 if (newWorker.state === "installed") {
                   if (navigator.serviceWorker.controller) {
-                    if (confirm("New Update available")) { 
+                    if (confirm("New Update available installing")) { 
                       window.location.reload(); 
                     }
                   }
@@ -106,7 +106,7 @@
                 // activeWorker.state has changed
                 if (activeWorker.state === "installed") {
                   if (navigator.serviceWorker.controller) {
-                    if (confirm("New Update available")) {
+                    if (confirm("New Update available active")) {
                       window.location.reload();
                     }
                   }
