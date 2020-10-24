@@ -6,7 +6,7 @@ if ("serviceWorker" in navigator) {
       console.log(registration);
 
       registration.addEventListener("updatefound", () => {
-        const newWorker = reg.installing;
+        const newWorker = registration.installing;
         newWorker.addEventListener("statechange", () => {
           // newWorker.state has changed
           if (newWorker.state === "installed") {
