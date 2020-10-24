@@ -106,7 +106,7 @@
             activeWorker &&
               activeWorker.addEventListener("statechange", () => {
                 console.log("active statechange");
-                // activeWorker.state has changed
+                // activeWorker.state has changed 
                 if (activeWorker.state === "installed") {
                   if (navigator.serviceWorker.controller) {
                     if (confirm("New Update available active")) {
