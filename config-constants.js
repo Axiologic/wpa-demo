@@ -1,7 +1,7 @@
 let APP_CONFIG = {
   THEME: "app",
   LABELS_DICTIONARY: {
-    APP_NAME: "Web Dossier 15",
+    APP_NAME: "Web Dossier 16",
     APP_DESCRIPTION: "A smart application to keep your secrets",
     NEW_DOSSIER: "New Dossier",
     RESTORE_DOSSIER: "Restore Dossier",
