@@ -42,7 +42,7 @@
       };
 
       if ("serviceWorker" in navigator) {
-        const wb = new Workbox("swPwa.js", { scope: "/wpa-demo1/" });
+        const wb = new Workbox("swPwa.js", { scope: "/wpa-demo1/" }); 
 
         wb.addEventListener("installed", (event) => {
           console.log("installed", event);
