@@ -39,7 +39,7 @@
       } from "https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-window.prod.mjs";
 
       if ("serviceWorker" in navigator) {
-        const wb = new Workbox("swPwa.js");
+        const wb = new Workbox("assets/pwa/swPwa.js");
         let registration;
 
         // const showSkipWaitingPrompt = (event) => {
@@ -78,7 +78,7 @@
           console.log("installed", event);
           if (event.isUpdate) {
             if (confirm(`New content is available!. Click OK to refresh!`)) {
-              window.location.reload();
+              window.location.reload(true);
             }
           }
         });
@@ -88,29 +88,29 @@
 
           registration.addEventListener("updatefound", () => {
             console.log("updatefound", { installing: registration.installing, active: registration.active });
-            const newWorker = registration.installing;
-            newWorker &&
-              newWorker.addEventListener("statechange", () => {
-                console.log("installing statechange");
-                // newWorker.state has changed
-                if (newWorker.state === "installed") {
-                  if (navigator.serviceWorker.controller) {
-                    if (confirm("New Update available installing")) {
-                      window.location.reload();
-                    }
-                  }
-                }
-              });
+            // const newWorker = registration.installing;
+            // newWorker &&
+            //   newWorker.addEventListener("statechange", () => {
+            //     console.log("installing statechange");
+            //     // newWorker.state has changed
+            //     if (newWorker.state === "installed") {
+            //       if (navigator.serviceWorker.controller) {
+            //         if (confirm("New Update available installing")) {
+            //           window.location.reload(true);
+            //         }
+            //       }
+            //     }
+            //   });
 
             const activeWorker = registration.active;
             activeWorker &&
               activeWorker.addEventListener("statechange", () => {
                 console.log("active statechange");
-                // activeWorker.state has changed 
+                // activeWorker.state has changed
                 if (activeWorker.state === "installed") {
                   if (navigator.serviceWorker.controller) {
-                    if (confirm("New Update available active")) {  
-                      window.location.reload();
+                    if (confirm("New Update available active")) {
+                      window.location.reload(true);
                     }
                   }
                 }
