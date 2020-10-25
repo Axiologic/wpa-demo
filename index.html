@@ -32,7 +32,7 @@
     <!-- /pwa configs -->
 
     <!-- register pwa service worker and pwa installation -->
-    <script type="module"> 
+    <script type="module">
       import { Workbox, messageSW } from "./assets/pwa/workbox-window.prod.mjs";
 
       const showNewContentAvailable = () => {
@@ -59,7 +59,7 @@
             if (activeWorker) {
               activeWorker.addEventListener("statechange", () => {
                 console.log("active statechange");
-                if (activeWorker.state === "installed" && navigator.serviceWorker.controller) {
+                if (activeWorker.state === "redundant" && navigator.serviceWorker.controller) {
                   showNewContentAvailable();
                 }
               });
