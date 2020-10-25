@@ -64,7 +64,7 @@
   const wasInstallPopupShown = () =>
     "localStorage" in window && window.localStorage.getItem(INSTALL_POPUP_ITEM_KEY) === "true";
   const canInstallAutomatically = () => !isIos() && deferredPrompt;
-  const canInstallManually = () => isIos() && !isInStandaloneMode() && !wasInstallPopupShown;
+  const canInstallManually = () => isIos() && !isInStandaloneMode() && !wasInstallPopupShown();
   const canInstallApp = () => (canInstallAutomatically() || canInstallManually()) && !wasModalClosed;
 
   const closeModal = () => {
