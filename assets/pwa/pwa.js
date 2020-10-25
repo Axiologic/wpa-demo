@@ -1,27 +1,3 @@
-// // Check that service workers are registered
-// if ("serviceWorker" in navigator) {
-//   // Use the window load event to keep the page load performant
-//   window.addEventListener("load", () => {
-//     navigator.serviceWorker.register("swPwa.js", { scope: "/wpa-demo1/" }).then((registration) => {
-//       console.log(registration);
-
-//       registration.addEventListener("updatefound", () => {
-//         const newWorker = registration.installing;
-//         newWorker.addEventListener("statechange", () => {
-//           // newWorker.state has changed
-//           if (newWorker.state === "installed") {
-//             if (navigator.serviceWorker.controller) {
-//               if (confirm("New Update available")) {
-//                 window.location.reload();
-//               }
-//             }
-//           }
-//         });
-//       });
-//     });
-//   });
-// }
-
 (function setupInstallation() {
   let canProceedWithInstall = true;
   let deferredPrompt;

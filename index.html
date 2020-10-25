@@ -33,88 +33,37 @@
 
     <!-- register pwa service worker and pwa installation -->
     <script type="module">
-      import {
-        Workbox,
-        messageSW,
-      } from "https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-window.prod.mjs";
+      import { Workbox, messageSW } from "./assets/pwa/workbox-window.prod.mjs";
+
+      const showNewContentAvailable = () => {
+        if (confirm(`New content is available!. Click OK to refresh!`)) {
+          window.location.reload(true);
+        }
+      };
 
       if ("serviceWorker" in navigator) {
-        const wb = new Workbox("swPwa.js");
-        let registration;
-
-        // const showSkipWaitingPrompt = (event) => {
-        //   // `event.wasWaitingBeforeRegister` will be false if this is
-        //   // the first time the updated service worker is waiting.
-        //   // When `event.wasWaitingBeforeRegister` is true, a previously
-        //   // updated service worker is still waiting.
-        //   // You may want to customize the UI prompt accordingly.
-
-        //   // Assumes your app has some sort of prompt UI element
-        //   // that a user can either accept or reject.
-        //   if (confirm("UPDATE")) {
-        //     // Assuming the user accepted the update, set up a listener
-        //     // that will reload the page as soon as the previously waiting
-        //     // service worker has taken control.
-        //     wb.addEventListener("controlling", (event) => {
-        //       window.location.reload();
-        //     });
-
-        //     if (registration && registration.waiting) {
-        //       // Send a message to the waiting service worker,
-        //       // instructing it to activate.
-        //       // Note: for this to work, you have to add a message
-        //       // listener in your service worker. See below.
-        //       messageSW(registration.waiting, { type: "SKIP_WAITING" });
-        //     }
-        //   }
-        // };
-
-        // // Add an event listener to detect when the registered
-        // // service worker has installed but is waiting to activate.
-        // wb.addEventListener("waiting", showSkipWaitingPrompt);
-        // wb.addEventListener("externalwaiting", showSkipWaitingPrompt);
+        const wb = new Workbox("swPwa.js", { scope: "/wpa-demo1/" });
 
         wb.addEventListener("installed", (event) => {
           console.log("installed", event);
           if (event.isUpdate) {
-            if (confirm(`New content is available!. Click OK to refresh!`)) {
-              window.location.reload(true);
-            }
+            showNewContentAvailable();
           }
         });
 
-        wb.register().then((r) => {
-          registration = r;
-
+        wb.register().then((registration) => {
           registration.addEventListener("updatefound", () => {
             console.log("updatefound", { installing: registration.installing, active: registration.active });
-            // const newWorker = registration.installing;
-            // newWorker &&
-            //   newWorker.addEventListener("statechange", () => {
-            //     console.log("installing statechange");
-            //     // newWorker.state has changed
-            //     if (newWorker.state === "installed") {
-            //       if (navigator.serviceWorker.controller) {
-            //         if (confirm("New Update available installing")) {
-            //           window.location.reload(true);
-            //         }
-            //       }
-            //     }
-            //   });
 
             const activeWorker = registration.active;
-            activeWorker &&
+            if (activeWorker) {
               activeWorker.addEventListener("statechange", () => {
                 console.log("active statechange");
-                // activeWorker.state has changed
-                if (activeWorker.state === "installed") {
-                  if (navigator.serviceWorker.controller) {
-                    if (confirm("New Update available active")) {
-                      window.location.reload(true);
-                    }
-                  }
+                if (activeWorker.state === "installed" && navigator.serviceWorker.controller) {
+                  showNewContentAvailable();
                 }
               });
+            }
           });
         });
 
