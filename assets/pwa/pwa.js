@@ -28,9 +28,8 @@
   })();
 
   const isIos = () => {
-    return true;
-    // const userAgent = window.navigator.userAgent.toLowerCase();
-    // return /iphone|ipad|ipod/.test(userAgent);
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    return /iphone|ipad|ipod/.test(userAgent);
   };
 
   const INSTALL_POPUP_ITEM_KEY = "@installPopup";
